@@ -41,13 +41,13 @@
 
 		this.update = function(time){
 			var el = document.getElementById(html_id);
-
+			var circleRadius = document.getElementById(html_id).getAttribute("r");
 			//see if the circle is going outside the browser. if it is, reverse the velocity
-			if( this.info.cx > document.body.clientWidth || this.info.cx < 0)
+			if( this.info.cx >= (document.body.clientWidth - circleRadius) || this.info.cx <= circleRadius)
 			{
 				this.info.velocity.x = this.info.velocity.x * -1;
 			}
-			if( this.info.cy > document.body.clientHeight || this.info.cy < 0)
+			if( this.info.cy >= (document.body.clientHeight - circleRadius) || this.info.cy <= circleRadius)
 			{
 				this.info.velocity.y = this.info.velocity.y * -1;
 			}
