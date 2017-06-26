@@ -10,26 +10,6 @@
 	document.getElementById("svg").setAttribute("width", document.body.clientWidth);
 	document.getElementById("svg").setAttribute("height", document.body.clientHeight);
 
-	function getTimePressed() {
-
-		var mousedown_time;
-		var time_pressed;
-
-		function getTime(){
-			var date = new Date();
-			return date.getTime();
-		}
-
-		document.onmousedown = function(e){
-			mousedown_time = getTime();
-		}
-		document.onmouseup = function(e){
-			time_pressed = getTime() - mousedown_time;
-		}
-		console.log(time_pressed);
-		return time_pressed;
-	}
-
 	function Circle(cx, cy, html_id, time_pressed)
 	{
 		var html_id = html_id;
