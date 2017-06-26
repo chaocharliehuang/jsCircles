@@ -7,6 +7,9 @@
 	<svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
 
 	<script>
+	document.getElementById("svg").setAttribute("width", document.body.clientWidth);
+	document.getElementById("svg").setAttribute("height", document.body.clientHeight);
+
 	function Circle(cx, cy, html_id)
 	{
 		var html_id = html_id;
