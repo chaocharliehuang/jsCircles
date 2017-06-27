@@ -29,7 +29,7 @@
 				x: randomNumberBetween(-3,3),
 				y: randomNumberBetween(-3,3)
 			}
-			// {html_id: 0, info: {cx: 1, cy: 1, velocity: {x: 1, y: 1}}}
+
 			//create a circle 
 			var circle = makeSVG('circle', 
 				{ 	cx: this.info.cx,
@@ -43,20 +43,22 @@
 		}
 		
 		function hasCollided(x, y, circlesArr, circleRadius) {
+			var collided = false;
 			for (var circle = 0; circle < circlesArr.length; circle++) {
-				console.log(circlesArr[circle].html_id, html_id)
-				// if(circlesArr[circle].html_id === html_id ) {return};
+				if(circlesArr[circle].html_id === html_id ) {
+					continue;
+				}
 				var cx = circlesArr[circle].info.cx;
 				var cy = circlesArr[circle].info.cy;
 				circleRadius = parseFloat(circleRadius);
-				console.log(x - circleRadius);
-				console.log((cx >= x - circleRadius) && (cx <= x + circleRadius), (cy >= y - circleRadius) && (cy <= y + circleRadius))
-				return (cx >= x - circleRadius) && (cx <= x + circleRadius) && (cy >= y - circleRadius) && (cy <= y + circleRadius);
+				if ((cx >= x - circleRadius) && (cx <= x + circleRadius) && (cy >= y - circleRadius) && (cy <= y + circleRadius)) {
+					collided = true;
+					circlesArr[circle].info.velocity.x *= 1;
+					circlesArr[circle].info.velocity.y *= 1;
+				}
 			}
+			return collided;
 		}
-
-
-		//TODO: pass el into checkCOllision function
 		
 		this.update = function(time, circlesArr){
 			console.log("IN UPDATE", html_id)
@@ -74,11 +76,9 @@
 				this.info.velocity.y = this.info.velocity.y * -1;
 			}
 			if (hasCollided(this.info.cx, this.info.cy, circlesArr, circleRadius)) {
-				console.log("Collision!");
 				this.info.velocity.x = this.info.velocity.x * -1;
 				this.info.velocity.y = this.info.velocity.y * -1;
 			}
-
 
 			this.info.cx = this.info.cx + this.info.velocity.x*time;
 			this.info.cy = this.info.cy + this.info.velocity.y*time;
